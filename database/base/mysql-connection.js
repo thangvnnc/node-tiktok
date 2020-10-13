@@ -4,6 +4,6 @@ module.exports = {
     host     : "localhost",
     user     : "root",
     password : "",
-    database : "dev_vmedic_aa6c",
+    database : "dev_vmedic__aa6c",
     port     : 3306,
 }
