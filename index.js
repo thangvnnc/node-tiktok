@@ -5,21 +5,21 @@ var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 var fs = require('fs');
-var sqlExt = require('./database/MysqlExtension');
+var sqlExt = require('./database/mysql-extension');
 
 function getAllUser() {
     return sqlExt.query('select * from users', []);
 }
 
 getAllUser()
-.then(function (users){
-    console.log(users);
-})
-.catch(function (err) {
-    if (err instanceof sqlExt.MysqlException) {
-        console.log(err);
-    }
-});
+    .then(function (users){
+        console.log(users);
+    })
+    .catch(function (err) {
+        if (err instanceof sqlExt.MysqlException) {
+            console.log(err);
+        }
+    });
 
 
 
