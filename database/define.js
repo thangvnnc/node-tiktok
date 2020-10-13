@@ -1,7 +1,9 @@
+'use strict';
 module.exports = {
-    HOST: "localhost",
-    PORT: 3306,
-    USER: "root",
-    PASS: "",
-    DBNAME: "dev_vmedic__aa6c",
+    connectionLimit : 10,
+    host     : "localhost",
+    user     : "root",
+    password : "",
+    database : "dev_vmedic_aa6c",
+    port     : 3306,
 }

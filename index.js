@@ -4,9 +4,24 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
-var blueBird = require('bluebird');
 var fs = require('fs');
-var dbInfo = require('./database/define');
+var sqlExt = require('./database/MysqlExtension');
+
+function getAllUser() {
+    return sqlExt.query('select * from users', []);
+}
+
+getAllUser()
+.then(function (users){
+    console.log(users);
+})
+.catch(function (err) {
+    if (err instanceof sqlExt.MysqlException) {
+        console.log(err);
+    }
+});
+
+
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
