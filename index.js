@@ -5,7 +5,7 @@ var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 var fs = require('fs');
-var User = require('./database/module/User');
+var User = require('./src/database/module/User');
 
 User.getAll()
     .then(function (users){
