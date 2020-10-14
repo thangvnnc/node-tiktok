@@ -4,10 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "12.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thangvnnc/node-tiktok.git"
   },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thangvnnc/node-tiktok/issues"
+  },
+  "homepage": "https://github.com/thangvnnc/node-tiktok#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
