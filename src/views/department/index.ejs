@@ -1,0 +1,133 @@
+<div class="container-fluid">
+    <h5>Department</h5>
+    <div class="table-responsive">
+        <table class="table table-stripped table-bordered table-hover">
+            <thead>
+            <tr class="bg-primary">
+                <th>Id</th>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for (var idxDepartment = 0; idxDepartment < departments.data.length; idxDepartment++){
+                var deparment = departments.data[idxDepartment];
+            %>
+            <tr>
+                <td><%=deparment.id%></td>
+                <td><%=deparment.name%></td>
+                <td>
+                    <a id="p<%=deparment.id%>" href="#modal-edit" data-toggle="modal">
+                        <span class="fa fa-pencil"></span>
+                    </a>&nbsp;
+                    <a id="delete-<%=deparment.id%>" href="/department/delete/<%=deparment.id%>">
+                        <span class="fa fa-trash"></span>
+                    </a>
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $('#p<%=deparment.id%>').click(function(event) {
+                                $('#textedit').val('<%=deparment.name%>');
+                                $('#departmentId').val('<%=deparment.id%>');
+                            });
+                            $('#delete-<%=deparment.id%>').click(function(e) {
+                                e.preventDefault();
+                                var href = $(this).attr('href');
+                                swal({
+                                    title: 'Are you sure?',
+                                    buttons: true,
+                                    buttons: ['Cancel', 'Yes, delete it!'],
+                                    dangerMode: true,
+                                    closeModal: true,
+                                })
+                                    .then(function(confirm) {
+                                        if(confirm)
+                                            location.href = href;
+                                    });
+                            });
+                        });
+                    </script>
+                </td>
+            </tr>
+            <%}%>
+            </tbody>
+        </table>
+        <%-departments.links()%>
+    </div>
+    <br>
+    <form action="/department" method="POST" data-toggle="validator">
+        <div class="form-group row">
+            <label class="col-form-label col-md-2">Department Name</label>
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="name" id="name" placeholder="Enter Name" required="required">
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-offset-2 col-md-4">
+                <button type="submit" class="btn btn-primary">Add Department</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="modalEditLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="modalEditLabel">Edit Department</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="form-edit" data-toggle="validator" action="/department/update" method="POST">
+                        <input type="hidden" name="departmentId" id="departmentId">
+                        <div class="form-group">
+                            <label for="recipient-name" class="form-control-label">
+                                Department Name
+                            </label>
+                            <input type="text" class="form-control" id="textedit" name="name" required="required">
+                            <div class="help-block with-errors"></div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        Close</button>
+                    <button type="button" class="btn btn-primary" id="edit-submit">Edit</button>
+                    <script type="text/javascript">
+                        $(document).ready(function($) {
+                            $('#edit-submit').click(function(event) {
+                                $('#form-edit').submit();
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%if (backErrors.length > 0) {%>
+<script>
+    $(function() {
+        swal({
+            title: '<%=backErrors[0]%>',
+            buttons: false,
+            icon: 'error',
+            timer: 1500
+        });
+    });
+</script>
+<%}%>
+<%if (continueSucceses.length > 0) {%>
+<script>
+    $(function() {
+        swal({
+            title: '<%=continueSucceses[0]%>',
+            buttons: false,
+            icon: 'success',
+            timer: 1500
+        });
+    });
+</script>
+<%}%>

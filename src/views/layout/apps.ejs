@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>
+        <%if (title) {%> <%=title%> <%} else {%> : 'Tiktoc System'<%}%>
+    </title>
+    <link rel="stylesheet" href="public/lib/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="public/lib/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="public/css/navbar-fixed-left.min.css">
+    <link rel="stylesheet" href="public/lib/timepicki/css/timepicki.css">
+    <link rel="stylesheet" href="public/css/app.css">
+    <script src="public/lib/jquery/jquery.min.js"></script>
+    <script src="public/js/app.js"></script>
+    <script src="public/lib/bootstrap/bootstrap.min.js"></script>
+    <script src="public/lib/moment/moment.js "></script>
+    <script src="public/lib/sweetalert/sweetalert.min.js "></script>
+    <script src="public/lib/bootstrap-validator/validator.min.js"></script>
+    <script src="public/lib/timepicki/js/timepicki.js"></script>
+    <script>
+        $(function() {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+<div id="loader-wrapper">
+    <div id="loader"></div>
+</div>
+<nav class="navbar navbar-inverse navbar-fixed-left">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Tiktoc System</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+<!--                @if(Auth::user()->isSuperAdmin())-->
+                <li>
+                    <a href="{{ url('/store')  }}">
+                        <span><i class="fa fa-map"></i></span>
+                        <span>Store</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/department">
+                        <span><i class="fa fa-building"></i></span>
+                        <span>Department</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/employee')  }}">
+                        <span><i class="fa fa-users"></i></span>
+                        <span>Emloyee</span>
+                    </a>
+                </li>
+<!--                @endif-->
+                <li>
+                    <a href="{{ url('/report/salary')  }}">
+                        <span><i class="fa fa-usd"></i></span>
+                        <span>Emloyee Salary</span>
+                    </a>
+                </li>
+<!--                @if(Auth::user()->isSuperAdmin())-->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <span><i class="fa fa-calendar"></i></span>
+                        <span>Schedule Shift</span>
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{url('weekday-shift')}}">Weekday Shift</a></li>
+                        <li><a href="{{url('weekend-shift')}}">Weekend Shift</a></li>
+                        <li><a href="{{url('extra-shift')}}">Extra Shift</a></li>
+                        <li><a href="{{url('holiday')}}">Holiday</a></li>
+                    </ul>
+                </li>
+<!--                @endif-->
+                <li>
+                    <a href="{{ url('/weekday-shift')  }}">
+                        <span><i class="fa fa-calendar"></i></span>
+                        <span>Weekday Shift</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/weekend-shift')  }}">
+                        <span><i class="fa fa-calendar"></i></span>
+                        <span>Weekend Shift</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/extra-shift')  }}">
+                        <span><i class="fa fa-calendar"></i></span>
+                        <span>Extra Shift</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/shift')  }}">
+                        <span><i class="fa fa-clock-o"></i></span>
+                        <span>Shift History</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/shift2')  }}">
+                        <span><i class="fa fa-clock-o"></i></span>
+                        <span>Shift History Test</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/shift3')  }}">
+                        <span><i class="fa fa-clock-o"></i></span>
+                        <span>Shift History 2</span>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <span><i class="fa fa-file"></i></span>
+                        <span>Report</span>
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{url('report/roster/forcast')}}">Roster Forcast</a></li>
+                        <li><a href="{{url('report/attendance')}}">Attendance</a></li>
+                        <li><a href="{{url('report/wage-cost')}}">Wage Costs</a></li>
+                        <li><a href="{{url('report/wage-cost4')}}">Wage Costs Test</a></li>
+                        <li><a href="{{url('report/wage-cost5')}}">Wage Costs 2</a></li>
+                        <li><a href="{{url('report/roster')}}">Roster</a></li>
+                        {{--<li><a href="{{url('report/roster/test')}}">Roster Test</a></li>--}}
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{ url('/logout')  }}" class="waves-effect  waves-light" >
+                        <span><i class="fa fa-user"></i></span>
+                        <span>Log out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div id="content">
+        <%- yield %>
+    </div>
+    <hr />
+    <footer>
+        Tiktoc  System
+    </footer>
+
+</div>
+<script>
+    $(function() {
+        $('.modal').on('shown.bs.modal', function(){
+            var token = $(this).find('.modal-body form input[name=_token]');
+            if(token == null) {
+                $(this).find('.modal-body form').append('{{csrf_field()}}');
+            }else {
+                token.val('{{csrf_token()}}');
+            }
+        });
+    });
+</script>
+</body>
+</html>
