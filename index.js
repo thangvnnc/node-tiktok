@@ -29,10 +29,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 var department = require('./src/controller/department');
-app.use('/department', department);
-
 var user = require('./src/controller/user');
+var report = require('./src/controller/report');
+
+app.use('/department', department);
 app.use('/user', user);
+app.use('/report', report);
 
 app.listen(PORT, function (err) {
     if (err) {

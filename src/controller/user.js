@@ -4,7 +4,9 @@ var Verify = require('../common/verify');
 var express = require('express');
 var router = express.Router();
 
-router.get('/',async function (req, res) {
+router.get('/',index);
+
+async function index(req, res) {
     var page = Verify.isUInt(req.query.page) ? parseInt(req.query.page) : 1;
     var users = await User.paginate(req, "id", User.perPage, page);
     console.log(users.links());
@@ -14,6 +16,6 @@ router.get('/',async function (req, res) {
         layout: '../views/layout/apps',
         title: 'user'
     });
-})
+}
 
 module.exports = router
