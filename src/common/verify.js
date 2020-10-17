@@ -11,4 +11,8 @@ Verify.isUInt = function(str) {
     return parseInt(str) > 0;
 }
 
+Verify.parseNumberPage = function(str) {
+    return Verify.isUInt(str) ? parseInt(str) : 1;
+}
+
 module.exports = Verify;

@@ -1,6 +1,7 @@
 'use strict';
-var MysqlException = require('../database/base/mysql-extension');
-class Base extends MysqlException{
+var MysqlException = require('../database/base/mysql-exception');
+var MysqlExtension = require('../database/base/mysql-extension');
+class Base extends MysqlExtension{
     constructor(row) {
         super();
         for(var propertyName in row) {

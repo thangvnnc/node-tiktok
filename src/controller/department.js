@@ -10,7 +10,7 @@ router.post('/update', update);
 router.get('/delete/:id', deleteWithId);
 
 async function index(req, res) {
-    var page = Verify.isUInt(req.query.page) ? parseInt(req.query.page) : 1;
+    var page = Verify.parseNumberPage(req.query.page);
     var departments = await Department.paginate(req, "id", Department.perPage, page);
 
     res.layout('../views/department/index', {
@@ -26,9 +26,9 @@ async function insert(req, res) {
     var body = req.body;
     var results = await Department.insert(body.name);
     if (results.affectedRows > 0) {
-        req.flash('continueSucceses', 'Item has been added!')
+        req.flash('continueSucceses', 'Item has been added!');
     } else {
-        req.flash('backErrors', 'Item cannot added, try again!')
+        req.flash('backErrors', 'Item cannot added, try again!');
     }
     res.redirect('/department');
 }
@@ -37,9 +37,9 @@ async function update(req, res) {
     var body = req.body;
     var results = await Department.update(body.name, body.departmentId);
     if (results.affectedRows > 0) {
-        req.flash('continueSucceses', 'Item updated')
+        req.flash('continueSucceses', 'Item updated');
     } else {
-        req.flash('backErrors', 'Update fail, try again!')
+        req.flash('backErrors', 'Update fail, try again!');
     }
     res.redirect('/department');
 }

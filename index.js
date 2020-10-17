@@ -28,13 +28,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+var auth = require('./src/controller/auth');
 var department = require('./src/controller/department');
 var user = require('./src/controller/user');
 var report = require('./src/controller/report');
 
+// Global error handler - route handlers/middlewares which throw end up here
+app.use((err, req, res, next) => {
+    console.log(1);
+    // response to user with 403 error and details
+});
+app.use('/', auth);
 app.use('/department', department);
 app.use('/user', user);
 app.use('/report', report);
+
 
 app.listen(PORT, function (err) {
     if (err) {

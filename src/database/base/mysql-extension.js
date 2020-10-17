@@ -9,7 +9,25 @@ class MysqlExtension {
 MysqlExtension.instance = undefined;
 MysqlExtension.MysqlException = MysqlException;
 MysqlExtension.createInstance = function () {
-    return mysql.createPool(connection);
+    var pool = mysql.createPool(connection);
+    // pool.getConnection((err, con) =>
+    // {
+    //     try
+    //     {
+    //         if (con)
+    //         {
+    //             con.release();
+    //         }
+    //         else {
+    //             console.log('Error connecting to MySQL.');
+    //         }
+    //     }
+    //     catch (err)
+    //     {
+    //         console.log(`MySQL error. ${err}`);
+    //     }
+    // });
+    return pool;
 }
 MysqlExtension.getInstance = function () {
     if (!this.instance) {
