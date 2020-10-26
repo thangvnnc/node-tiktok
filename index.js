@@ -10,17 +10,25 @@ var ejsYield = require('ejs-yield');
 var flash = require('connect-flash');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
+var cookieSession = require('cookie-session');
 
+app.set('trust proxy', 1) // trust first proxy
 app.set('view engine', 'ejs');
 app.set('views', './src/views');
 app.use(ejsYield);
 
-app.use(cookieParser('secretString'));
-app.use(session({
+app.use(cookieSession({
     secret: 'aBcDeF',
-    resave: true,
-    saveUninitialized: true
+    signed: true,
 }));
+
+// app.use(cookieParser('secretString'));
+// app.use(session({
+//     secret: 'aBcDeF',
+//     resave: true,
+//     saveUninitialized: true,
+//     cookie: { secure: true }
+// }));
 app.use(flash());
 
 // Set body parser json
